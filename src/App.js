@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios'
-import './App.css';
+import './App.scss';
 import Main from './components/Main';
 import Header from './components/Header';
-
-
-
-
+import AsideMenu from './components/AsideMenu';
 
 function App() {
   const [ticker, setTicker] = useState('')
   const [stock, setStock] = useState(null);
   const [tickerInfo, setTickerInfo] = useState(null)
+  const [isAsideMenuVisible, setIsAsideMenuVisible] = useState(false)
+  const [favouriteTickers, setFavouriteTickers] = useState([])
 
   const API_KEY = '3b7fOT4l9UZGBGtJGyuZzwwuF0n2hqxb'
   const date = new Date()
@@ -30,7 +29,6 @@ function App() {
         console.error('Error fetching data:', error);
       });
     }
-  
   
   const fetchTickerDetails = () => {
     axios.get(TickerDetailsUrl)
@@ -53,11 +51,28 @@ function App() {
     setTicker(e.target.value)
   }
 
+  const handleShowAsideMenu = () => {
+    setIsAsideMenuVisible(!isAsideMenuVisible)
+  }
+
+  const handleAddToFavourite = (ticker) => {
+    if(!favouriteTickers.includes(ticker)){
+    setFavouriteTickers([...favouriteTickers, ticker])
+    }else {
+      setFavouriteTickers(favouriteTickers.filter(
+        element => element !== ticker
+      ));
+    }
+  }
+
+  const showAsideMenu = isAsideMenuVisible ? <AsideMenu handleShowAsideMenu={handleShowAsideMenu} favouriteTickers={favouriteTickers}/> : <button onClick={handleShowAsideMenu}>showMenu</button>
+
 
   return (
     <div className="App">
+      <aside>{showAsideMenu}</aside>
       <Header handleSetTicker={handleSetTicker} fetchData={fetchData} ticker={ticker}/>
-      {stock && <Main stock={stock} tickerInfo={tickerInfo} API_KEY={API_KEY}/>}
+      {stock && tickerInfo && <Main stock={stock} tickerInfo={tickerInfo} API_KEY={API_KEY} handleAddToFavourite={handleAddToFavourite}/>}
     </div>
   );
 }

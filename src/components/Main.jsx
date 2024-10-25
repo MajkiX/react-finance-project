@@ -3,14 +3,10 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 import './Main.scss'
 
-const Main = ({ stock, tickerInfo, API_KEY }) => {
+const Main = ({ stock, tickerInfo, API_KEY, handleAddToFavourite }) => {
 
     const { results, ticker } = stock
     const { name, address, branding, description, homepage_url, market_cap, sic_description, total_employees } = tickerInfo
-
-
-
-
 
     const formatTimestamp = (timestamp) => {
         const date = new Date(timestamp);
@@ -43,6 +39,7 @@ const Main = ({ stock, tickerInfo, API_KEY }) => {
                     <Line type="monotone" dataKey="h" stroke="#8422d8" name="Lowest Price" />
                 </LineChart>
             </ResponsiveContainer>
+            <button onClick={() => handleAddToFavourite(ticker)}>Favorite</button>
             <article>
                 <p>Description: <br /> {description}</p>
                 <p>HomePage: <a href={homepage_url}>{homepage_url}</a></p>
