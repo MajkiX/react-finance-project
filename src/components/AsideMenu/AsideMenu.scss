@@ -1,0 +1,14 @@
+.asideMenu {
+    width: 10vw;
+    height: 100vh;
+    background-color: beige;
+    z-index: 10;
+
+    ul {
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+}

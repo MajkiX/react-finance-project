@@ -1,0 +1,14 @@
+.header {
+    width: 100vw;
+    height: 14vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+    }
+}

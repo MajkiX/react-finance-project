@@ -14,11 +14,11 @@ const Main = ({ stock, tickerInfo, API_KEY, handleAddToFavourite }) => {
     };
 
     return (
-        <>
+        <div className='main'>
             <h1><img className='logoImg' src={branding.logo_url + `?apiKey=${API_KEY}`} alt="" /> </h1>
             <h2>{name}</h2>
             <h3>{ticker}</h3>
-            <ResponsiveContainer width="100%" height={500}>
+            <ResponsiveContainer className='graph' width="70%" height={500}>
                 <LineChart
                     data={results}
                     margin={{
@@ -33,7 +33,6 @@ const Main = ({ stock, tickerInfo, API_KEY, handleAddToFavourite }) => {
                     <YAxis domain={['dataMin - 10', 'dataMax + 10']} />
                     <Tooltip />
                     <Legend />
-                    {/* Wyświetlanie danych cen zamknięcia */}
                     <Line type="monotone" dataKey="c" stroke="#8884d8" name="Cena zamknięcia" />
                     <Line type="monotone" dataKey="h" stroke="#8444d8" name="Highest Price" />
                     <Line type="monotone" dataKey="h" stroke="#8422d8" name="Lowest Price" />
@@ -53,7 +52,7 @@ const Main = ({ stock, tickerInfo, API_KEY, handleAddToFavourite }) => {
                 </p>
                 <p>Total employees: {total_employees}</p>
             </article>
-        </>
+        </div>
     );
 }
 
