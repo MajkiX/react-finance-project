@@ -1,8 +1,9 @@
 .main {
+
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     color: #ebe5e5;
 
     .stockInfo {
@@ -25,6 +26,20 @@
                 width: 100px;
             }
         }
+
+        .stockStats {
+            font-size: 18px;
+        }
+    }
+
+    .addicionalInfoButton {
+        margin: 3vh 0;
+        background-color: #1d1a1a;
+        padding: 1vmax;
+    }
+
+    .addicionalInfo {
+        margin-bottom: 2vh;
     }
 
 

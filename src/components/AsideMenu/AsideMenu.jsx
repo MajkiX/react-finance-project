@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons'
 import './AsideMenu.scss'
 
 const AsideMenu = ({ handleShowAsideMenu, favouriteTickers, setTicker }) => {
@@ -8,13 +10,13 @@ const AsideMenu = ({ handleShowAsideMenu, favouriteTickers, setTicker }) => {
     const favouriteTickersList = favouriteTickers.map(ticker => (
         <li>
             <h3>{ticker}</h3>
-            <button onClick={() => setTicker(ticker)}>Set Ticker</button>
+            <button className='setTickerButton' onClick={() => setTicker(ticker)}>Set Ticker</button>
         </li>
     ))
 
     return (
         <div className='asideMenu'>
-            <button onClick={handleShowAsideMenu}>schowaj</button>
+            <button className='hideMenuButton' onClick={handleShowAsideMenu}><FontAwesomeIcon icon={faAnglesLeft} style={{ color: "#ebe5e5", }} /></button>
             <ul>{favouriteTickersList}</ul>
         </div>
     );

@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons'
+
 import './App.scss';
 import Main from './components/Main/Main';
 import Header from './components/Header/Header';
 import AsideMenu from './components/AsideMenu/AsideMenu';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const date = new Date()
@@ -18,7 +22,7 @@ function App() {
   const [secondDate, setSecondDate] = useState(yesterdayDate)
   const [tickerInfo, setTickerInfo] = useState(null)
   const [isAsideMenuVisible, setIsAsideMenuVisible] = useState(false)
-  const [favouriteTickers, setFavouriteTickers] = useState([])
+  const [favouriteTickers, setFavouriteTickers] = useState(['TSLA', "T", "AAPL"])
 
   
   const API_KEY = '3b7fOT4l9UZGBGtJGyuZzwwuF0n2hqxb'
@@ -89,7 +93,7 @@ function App() {
       setTicker={setTicker} 
     />
     : 
-    <button onClick={handleShowAsideMenu}>showMenu</button>
+    <button className='showMenuButton' onClick={handleShowAsideMenu}><FontAwesomeIcon icon={faAnglesRight} style={{color: "#ebe5e5",}} /></button>
 
 
   return (
@@ -103,15 +107,18 @@ function App() {
         yesterdayDate={yesterdayDate} 
         ticker={ticker} 
         firstDate={firstDate} 
-        secondDate={secondDate}/>
+        secondDate={secondDate}
+      />
       {stock && tickerInfo && 
       <Main
-      stock={stock} 
-      tickerInfo={tickerInfo} 
-      favouriteTickers={favouriteTickers}
-      API_KEY={API_KEY}
-      yesterdayDate={yesterdayDate}
-      handleAddToFavourite={handleAddToFavourite}/>}
+        stock={stock} 
+        tickerInfo={tickerInfo} 
+        favouriteTickers={favouriteTickers}
+        API_KEY={API_KEY}
+        yesterdayDate={yesterdayDate}
+        handleAddToFavourite={handleAddToFavourite}
+      />}
+      <Footer/>
     </div>
   );
 }

@@ -1,7 +1,16 @@
 .App {
+  margin: 0;
   height: 100%;
   text-align: center;
   background-color: #232020;
+
+  .showMenuButton {
+    height: 4vh;
+    width: 4vw;
+    background-color: #232020;
+    border: 1px solid #1d1a1a;
+    font-size: 1.5rem;
+  }
 }
 
 aside {
