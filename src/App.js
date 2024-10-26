@@ -104,7 +104,14 @@ function App() {
         ticker={ticker} 
         firstDate={firstDate} 
         secondDate={secondDate}/>
-      {stock && tickerInfo && <Main stock={stock} tickerInfo={tickerInfo} API_KEY={API_KEY} handleAddToFavourite={handleAddToFavourite}/>}
+      {stock && tickerInfo && 
+      <Main
+      stock={stock} 
+      tickerInfo={tickerInfo} 
+      favouriteTickers={favouriteTickers}
+      API_KEY={API_KEY}
+      yesterdayDate={yesterdayDate}
+      handleAddToFavourite={handleAddToFavourite}/>}
     </div>
   );
 }
