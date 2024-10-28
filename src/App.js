@@ -23,7 +23,8 @@ function App() {
   const [secondDate, setSecondDate] = useState(yesterdayDate)
   const [tickerInfo, setTickerInfo] = useState(null)
   const [isAsideMenuVisible, setIsAsideMenuVisible] = useState(false)
-  const [favouriteTickers, setFavouriteTickers] = useState(['TSLA', "T", "AAPL"])
+  const [favouriteTickers, setFavouriteTickers] = useState(['TSLA', "T", "AAPL", "AADI", "CERO", "CEP", "DOW"])
+  const [errors, setErrors] = useState()
 
   
   const API_KEY = '3b7fOT4l9UZGBGtJGyuZzwwuF0n2hqxb'
@@ -33,11 +34,14 @@ function App() {
   const fetchTickerData = () =>{
       axios.get(TickerDataUrl)
       .then(response => {
-        setStock(response.data);
+        if(response.data.queryCount > 0){
+          setStock(response.data);
+        }
         console.log(response.data);
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching ticker data:', error);
+        setErrors(error.message)
       });
     }
   
@@ -48,7 +52,8 @@ function App() {
             console.log(response.data.results);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching details data:', error);
+            setErrors(error.message)
         });
   }
 
@@ -56,6 +61,7 @@ function App() {
     fetchTickerData()
     fetchTickerDetails()
     setTicker('')
+    setErrors(null)
   }
 
   const handleSetTicker = e =>{
@@ -110,6 +116,7 @@ function App() {
         firstDate={firstDate} 
         secondDate={secondDate}
       />
+      {errors}
       {!stock && <WelcomePage/>}
       {stock && tickerInfo && 
       <Main
@@ -119,6 +126,7 @@ function App() {
         API_KEY={API_KEY}
         yesterdayDate={yesterdayDate}
         handleAddToFavourite={handleAddToFavourite}
+        isAsideMenuVisible={isAsideMenuVisible}
       />}
       <Footer/>
     </div>

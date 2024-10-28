@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faArrowDownWideShort, faArrowTurnUp } from '@fortawesome/free-solid-svg-icons'
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import './Main.scss'
 
 
-const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, handleAddToFavourite }) => {
+
+
+const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, handleAddToFavourite, isAsideMenuVisible }) => {
     const [isInfoVisible, setIsInfoVisible] = useState(false)
+    const { height, width } = useWindowDimensions()
 
     const { results, resultsCount, ticker } = stock
     const { name, address, branding, description, homepage_url, market_cap, sic_description, total_employees } = tickerInfo
@@ -37,21 +41,34 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
             </p>}
         </div>
 
+    const hideGraph = isAsideMenuVisible && width < 600
+
     return (
         <div className='main'>
             <div className='stockInfo'>
                 <div className="stockTitle">
-                    <img className='logoImg' src={branding.logo_url + `?apiKey=${API_KEY}`} alt="" />
+                    <img className='logoImg' src={branding?.logo_url + `?apiKey=${API_KEY}`} alt="" />
                     <h2>{name}</h2>
-                    <div className='starIcon'>{isInFavourutes ? <FontAwesomeIcon onClick={() => handleAddToFavourite(ticker)} icon={faStar} style={{ color: "#FFD43B" }} /> : <FontAwesomeIcon onClick={() => handleAddToFavourite(ticker)} icon={faStar} />}</div>
+                    <div className='starIcon'>{isInFavourutes ?
+                        <FontAwesomeIcon onClick={() => handleAddToFavourite(ticker)} icon={faStar} style={{ color: "#FFD43B" }} />
+                        :
+                        <FontAwesomeIcon onClick={() => handleAddToFavourite(ticker)} icon={faStar} />}
+                    </div>
                 </div>
                 <div className='stockStats'>
                     <h2>{yesterdayDate}</h2>
-                    <p>Highest price: ${results[resultsCount - 1].h}</p>
-                    <p>Lowest price: ${results[resultsCount - 1].l}</p>
+                    {results && resultsCount > 0 ? (
+                        <>
+                            <p>Highest price: ${results[resultsCount - 1].h}</p>
+                            <p>Lowest price: ${results[resultsCount - 1].l}</p>
+                        </>
+                    ) : (
+                        <p>No data available for the selected date range.</p>
+                    )
+                    }
                 </div>
             </div>
-            <ResponsiveContainer className='graph' width="70%" height={500}>
+            {!hideGraph && <ResponsiveContainer className='graph' width="90%" height={500}>
                 <LineChart
                     data={results}
                     margin={{
@@ -70,7 +87,7 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
                     <Line type="monotone" dataKey="h" stroke="#8444d8" name="Highest Price" />
                     <Line type="monotone" dataKey="l" stroke="#8422d8" name="Lowest Price" />
                 </LineChart>
-            </ResponsiveContainer>
+            </ResponsiveContainer>}
             <div className='description'>
                 <h2>Description: </h2>
                 <p className='description__text'>{description}</p>
@@ -81,7 +98,7 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
                 </div>
                 {addicionalInfo}
             </div>
-        </div>
+        </div >
     );
 }
 

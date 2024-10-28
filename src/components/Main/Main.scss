@@ -1,3 +1,6 @@
+$PrimaryColor: #1d1a1a;
+$SecondaryColor: #232020;
+
 .main {
     height: 100%;
     display: flex;
@@ -11,7 +14,8 @@
         justify-content: space-around;
         align-items: center;
         margin: 4vh 0;
-        background-color: #1d1a1a;
+        padding: 1vh 0;
+        background-color: $PrimaryColor;
 
         .stockTitle {
             display: flex;
@@ -41,15 +45,15 @@
         flex-direction: column;
 
         &__button {
-            width: 10vw;
+            width: 15vmax;
             margin: 3vh 0;
-            background-color: #1d1a1a;
+            background-color: $PrimaryColor;
             padding: 1vmax;
             cursor: pointer;
         }
 
         &__text {
-            background-color: #1d1a1a;
+            background-color: $PrimaryColor;
             padding: 15px;
             margin-bottom: 5vh;
         }
@@ -63,7 +67,7 @@
 
     .description {
         width: 100%;
-        background-color: #1d1a1a;
+        background-color: $PrimaryColor;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -73,5 +77,18 @@
             width: 50vw;
             padding: 10px;
         }
+    }
+}
+
+@media (max-width: 600px) {
+    .main {
+        .stockInfo {
+            flex-direction: column;
+
+            .stockTitle {
+                align-items: center;
+            }
+        }
+
     }
 }

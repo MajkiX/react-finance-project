@@ -1,14 +1,19 @@
+$PrimaryColor: #1d1a1a;
+$SecondaryColor: #232020;
+
 .asideMenu {
     width: 7vmax;
     height: 100vh;
-    background-color: #1d1a1a;
+    background-color: $PrimaryColor;
     z-index: 10;
+    // overflow-y: scroll;
+    overflow-x: hidden;
 
     .hideMenuButton {
         height: 4vh;
         width: 7vmax;
-        background-color: #232020;
-        border: 1px solid #1d1a1a;
+        background-color: $SecondaryColor;
+        border: 1px solid $PrimaryColor;
         font-size: 1.5rem;
     }
 
@@ -23,9 +28,35 @@
                 color: #ebe5e5;
                 height: 4vh;
                 width: 7vmax;
-                background-color: #232020;
-                border: 1px solid #1d1a1a;
+                background-color: $SecondaryColor;
+                border: 1px solid $PrimaryColor;
+                cursor: pointer;
+            }
+        }
+    }
+}
 
+@media (max-width: 600px) {
+    .asideMenu {
+        width: 100vw;
+
+        .hideMenuButton {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 7vh;
+            width: 12vmax;
+            font-size: 2rem;
+
+        }
+
+        ul li {
+            font-size: 1.5rem;
+
+            .setTickerButton {
+                height: 7vh;
+                width: 12vmax;
+                font-size: 1rem;
             }
         }
     }
