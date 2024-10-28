@@ -8,6 +8,7 @@ import Main from './components/Main/Main';
 import Header from './components/Header/Header';
 import AsideMenu from './components/AsideMenu/AsideMenu';
 import Footer from './components/Footer/Footer';
+import WelcomePage from './components/WelcomePage/WelcomPage';
 
 function App() {
   const date = new Date()
@@ -109,6 +110,7 @@ function App() {
         firstDate={firstDate} 
         secondDate={secondDate}
       />
+      {!stock && <WelcomePage/>}
       {stock && tickerInfo && 
       <Main
         stock={stock} 

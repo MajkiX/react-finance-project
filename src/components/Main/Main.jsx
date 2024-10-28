@@ -24,7 +24,7 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
     };
 
     const addicionalInfo = isInfoVisible &&
-        <div className='addicionalInfo'>
+        <div className='addicionalInfo__text'>
             <p>Market Cap: ${Math.floor(market_cap)}</p>
             {sic_description && <p>Category: {sic_description}</p>}
             {total_employees && <p>Total employees: {total_employees}</p>}
@@ -58,7 +58,7 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
                         top: 10,
                         right: 30,
                         left: 20,
-                        bottom: 5,
+                        bottom: 25,
                     }}
                 >
                     <CartesianGrid stroke="#8884d8" strokeDasharray="3 3" />
@@ -71,12 +71,16 @@ const Main = ({ stock, tickerInfo, favouriteTickers, API_KEY, yesterdayDate, han
                     <Line type="monotone" dataKey="l" stroke="#8422d8" name="Lowest Price" />
                 </LineChart>
             </ResponsiveContainer>
-            <h2>Description: </h2>
-            <p className='description'>{description}</p>
-            <div className='addicionalInfoButton' onClick={handleShowAddicionalInfo}>
-                Addicional Info {isInfoVisible ? <FontAwesomeIcon icon={faArrowTurnUp} /> : <FontAwesomeIcon icon={faArrowDownWideShort} />}
+            <div className='description'>
+                <h2>Description: </h2>
+                <p className='description__text'>{description}</p>
             </div>
-            {addicionalInfo}
+            <div className='addicionalInfo'>
+                <div className='addicionalInfo__button' onClick={handleShowAddicionalInfo}>
+                    Addicional Info {isInfoVisible ? <FontAwesomeIcon icon={faArrowTurnUp} /> : <FontAwesomeIcon icon={faArrowDownWideShort} />}
+                </div>
+                {addicionalInfo}
+            </div>
         </div>
     );
 }

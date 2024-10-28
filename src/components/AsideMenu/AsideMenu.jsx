@@ -8,7 +8,7 @@ const AsideMenu = ({ handleShowAsideMenu, favouriteTickers, setTicker }) => {
 
 
     const favouriteTickersList = favouriteTickers.map(ticker => (
-        <li>
+        <li key={ticker}>
             <h3>{ticker}</h3>
             <button className='setTickerButton' onClick={() => setTicker(ticker)}>Set Ticker</button>
         </li>

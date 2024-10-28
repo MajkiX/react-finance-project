@@ -1,5 +1,4 @@
 .main {
-
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -11,7 +10,8 @@
         width: 100%;
         justify-content: space-around;
         align-items: center;
-        margin-top: 3vh;
+        margin: 4vh 0;
+        background-color: #1d1a1a;
 
         .stockTitle {
             display: flex;
@@ -32,22 +32,46 @@
         }
     }
 
-    .addicionalInfoButton {
-        margin: 3vh 0;
-        background-color: #1d1a1a;
-        padding: 1vmax;
-    }
+
 
     .addicionalInfo {
-        margin-bottom: 2vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &__button {
+            width: 10vw;
+            margin: 3vh 0;
+            background-color: #1d1a1a;
+            padding: 1vmax;
+            cursor: pointer;
+        }
+
+        &__text {
+            background-color: #1d1a1a;
+            padding: 15px;
+            margin-bottom: 5vh;
+        }
     }
 
 
     .graph {
         z-index: 1;
+        margin-bottom: 3vh;
     }
 
     .description {
-        width: 50vw;
+        width: 100%;
+        background-color: #1d1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &__text {
+            width: 50vw;
+            padding: 10px;
+        }
     }
 }
